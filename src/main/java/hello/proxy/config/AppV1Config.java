@@ -2,10 +2,10 @@ package hello.proxy.config;
 
 import hello.proxy.app.v1.OrderControllerV1;
 import hello.proxy.app.v1.OrderControllerV1Impl;
-import hello.proxy.app.v1.OrderRepositoryV1;
+import hello.proxy.app.v1.OrderRepositoryV2;
 import hello.proxy.app.v1.OrderRepositoryV1Impl;
 import hello.proxy.app.v1.OrderServiceV1;
-import hello.proxy.app.v1.OrderServiceV1Impl;
+import hello.proxy.app.v1.OrderServiceV2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,11 +19,11 @@ public class AppV1Config {
     
     @Bean
     public OrderServiceV1 orderServiceV1() {
-        return new OrderServiceV1Impl(orderRepositoryV1());
+        return new OrderServiceV2(orderRepositoryV1());
     }
     
     @Bean
-    public OrderRepositoryV1 orderRepositoryV1() {
+    public OrderRepositoryV2 orderRepositoryV1() {
         return new OrderRepositoryV1Impl();
     }
 }

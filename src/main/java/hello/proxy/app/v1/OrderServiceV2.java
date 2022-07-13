@@ -1,10 +1,10 @@
 package hello.proxy.app.v1;
 
-public class OrderServiceV1Impl implements OrderServiceV1{
+public class OrderServiceV2 implements OrderServiceV1{
     
-    private final OrderRepositoryV1 repository;
+    private final OrderRepositoryV2 repository;
     
-    public OrderServiceV1Impl(OrderRepositoryV1 repositoryV1) {
+    public OrderServiceV2(OrderRepositoryV2 repositoryV1) {
         this.repository = repositoryV1;
     }
     

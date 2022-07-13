@@ -2,10 +2,10 @@ package hello.proxy.config.v2_dynamicproxy.handler;
 
 import hello.proxy.app.v1.OrderControllerV1;
 import hello.proxy.app.v1.OrderControllerV1Impl;
-import hello.proxy.app.v1.OrderRepositoryV1;
+import hello.proxy.app.v1.OrderRepositoryV2;
 import hello.proxy.app.v1.OrderRepositoryV1Impl;
 import hello.proxy.app.v1.OrderServiceV1;
-import hello.proxy.app.v1.OrderServiceV1Impl;
+import hello.proxy.app.v1.OrderServiceV2;
 import hello.proxy.trace.logtrace.LogTrace;
 import java.lang.reflect.Proxy;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ public class DynamicProxyBasicConfig {
     
     @Bean
     public OrderServiceV1 orderServiceV1(LogTrace logTrace) {
-        OrderServiceV1 orderService = new OrderServiceV1Impl(orderRepositoryV1(logTrace));
+        OrderServiceV1 orderService = new OrderServiceV2(orderRepositoryV1(logTrace));
     
         return (OrderServiceV1) Proxy.newProxyInstance(
             OrderServiceV1.class.getClassLoader(),
@@ -34,11 +34,11 @@ public class DynamicProxyBasicConfig {
     }
     
     @Bean
-    public OrderRepositoryV1 orderRepositoryV1(LogTrace logTrace) {
-        OrderRepositoryV1 orderRepository = new OrderRepositoryV1Impl();
+    public OrderRepositoryV2 orderRepositoryV1(LogTrace logTrace) {
+        OrderRepositoryV2 orderRepository = new OrderRepositoryV1Impl();
     
-        return (OrderRepositoryV1) Proxy.newProxyInstance(OrderRepositoryV1.class.getClassLoader(),
-            new Class[]{OrderRepositoryV1.class},
+        return (OrderRepositoryV2) Proxy.newProxyInstance(OrderRepositoryV2.class.getClassLoader(),
+            new Class[]{OrderRepositoryV2.class},
             new LogTraceBasicHandler(orderRepository, logTrace));
     }
     
